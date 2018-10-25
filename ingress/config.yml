@@ -1,10 +1,30 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: gcp-ingress
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: "tyr-static-ip"
+   name: gcp-ingress
+   annotations:
+      kubernetes.io/ingress.global-static-ip-name: 'tyr-static-ip'
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
-  backend:
-    serviceName: web
-    servicePort: 8080
+   tls:
+      - secretName: base-tyr-tools
+        hosts:
+           - tyr.tools
+      - secretName: wild-tyr-tools
+        hosts:
+           - '*.tyr.tools'
+   rules:
+      - host: tyr.tools
+        http:
+           paths:
+              - path: /*
+                backend:
+                   serviceName: frontend-svc
+                   servicePort: 1337
+      - host: '*.tyr.tools'
+        http:
+           paths:
+              - path: /*
+                backend:
+                   serviceName: web
+                   servicePort: 8080
