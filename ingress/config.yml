@@ -4,7 +4,7 @@ metadata:
    name: gcp-ingress
    annotations:
       kubernetes.io/ingress.global-static-ip-name: 'tyr-static-ip'
-      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      kubernetes.io/ingress.class: 'nginx'
 spec:
    tls:
       - secretName: base-tyr-tools
@@ -17,14 +17,14 @@ spec:
       - host: tyr.tools
         http:
            paths:
-              - path: /*
+              - path: /
                 backend:
                    serviceName: frontend-svc
                    servicePort: 1337
       - host: '*.tyr.tools'
         http:
            paths:
-              - path: /*
+              - path: /
                 backend:
                    serviceName: web
                    servicePort: 8080
