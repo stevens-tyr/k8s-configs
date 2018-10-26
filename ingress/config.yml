@@ -21,6 +21,13 @@ spec:
                 backend:
                    serviceName: frontend-svc
                    servicePort: 1337
+      - host: 'jenkins.tyr.tools'
+        http:
+           paths:
+              - path: /
+                backend:
+                   serviceName: jenkins-ci
+                   servicePort: 8080
       - host: '*.tyr.tools'
         http:
            paths:
