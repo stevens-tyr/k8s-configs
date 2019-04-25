@@ -30,12 +30,3 @@ spec:
   ports:
     - port: 1337
       nodePort: 32222
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: basic-ingress
-spec:
-  backend:
-    serviceName: frontend-svc
-    servicePort: 1337
