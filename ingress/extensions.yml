@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ingress
+  namespace: kube-system
 spec:
   rules:
     - host: tyr.tools
@@ -11,6 +12,27 @@ spec:
             backend:
               serviceName: frontend-svc
               servicePort: 1337
+    - host: court-herald.tyr.tools
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: court-herald-svc
+              servicePort: 4444
+    - host: app.tyr.tools
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: plague-doctor-svc
+              servicePort: 5555
+    - host: traefik.tyr.tools
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: traefik-web-ui
+              servicePort: 80
     # - host: 'jenkins.tyr.tools'
     #     http:
     #        paths:

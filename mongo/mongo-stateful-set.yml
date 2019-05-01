@@ -30,6 +30,7 @@ spec:
           image: mongo
           command:
             - mongod
+            - '--bind_ip_all'
           ports:
             - containerPort: 27017
   volumeClaimTemplates:
