@@ -33,13 +33,16 @@ spec:
             - '--bind_ip_all'
           ports:
             - containerPort: 27017
+          volumeMounts:
+            - mountPath: '/data/db'
+              name: mongo-local-claim
   volumeClaimTemplates:
     - metadata:
         name: mongo-local-claim
       spec:
+        storageClassName: local-storage
         accessModes:
           - ReadWriteOnce
-        storageClassName: local-storage
         resources:
           requests:
             storage: 3Gi

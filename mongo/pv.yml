@@ -5,7 +5,6 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: local-storage
   capacity:
     storage: 3Gi
   local:
